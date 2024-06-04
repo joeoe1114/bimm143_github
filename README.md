@@ -3,7 +3,7 @@ My classwork for [BIMM143 Spring 20249(https://bioboot.github.io/bimm143_S24/)] 
 
 - **Class 4** [R Basics](https://github.com/joeoe1114/bimm143_github/blob/main/class04/bimm-143-class-4.pdf)
 
-- **Class 5** [Data visualization with ggplot](https://github.com/joeoe1114/bimm143_github/blob/main/class05/class05.pdf)
+- **Class 5** [Data visualization with ggplot](class05/class05.md)
 
 - **Class 6** [R Functions](https://github.com/joeoe1114/bimm143_github/blob/main/class06/class06.pdf)
 
