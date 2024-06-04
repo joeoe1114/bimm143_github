@@ -7,6 +7,8 @@ My classwork for [BIMM143 Spring 20249(https://bioboot.github.io/bimm143_S24/)] 
 
 - **Class 6** [R Functions](https://github.com/joeoe1114/bimm143_github/blob/main/class06/class06.pdf)
 
+- **Class 7** []()
+
 - **Class 8** []()
 
 - **Class 9**
