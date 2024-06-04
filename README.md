@@ -7,7 +7,7 @@ My classwork for [BIMM143 Spring 20249(https://bioboot.github.io/bimm143_S24/)] 
 
 - **Class 6** [R Functions](class06/class06.md)
 
-- **Class 7** []()
+- **Class 7** [Machine Learning 1](class07/class07.md)
 
 - **Class 8** []()
 
