@@ -5,7 +5,7 @@ My classwork for [BIMM143 Spring 20249(https://bioboot.github.io/bimm143_S24/)] 
 
 - **Class 5** [Data visualization with ggplot](class05/class05.md)
 
-- **Class 6** [R Functions](https://github.com/joeoe1114/bimm143_github/blob/main/class06/class06.pdf)
+- **Class 6** [R Functions](class06/class06.md)
 
 - **Class 7** []()
 
