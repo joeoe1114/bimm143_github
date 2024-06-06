@@ -9,7 +9,7 @@ My classwork for [BIMM143 Spring 20249(https://bioboot.github.io/bimm143_S24/)] 
 
 - **Class 7** [Machine Learning 1](class07/class07.md)
 
-- **Class 8** [Breast Cancer Mini Project]()
+- **Class 8** [Breast Cancer Mini Project](class08/class08.md)
 
 - **Class 9** [Candy Analysis Mini Project]()
 
