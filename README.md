@@ -13,7 +13,7 @@ My classwork for [BIMM143 Spring 20249(https://bioboot.github.io/bimm143_S24/)] 
 
 - **Class 9** [Candy Analysis Mini Project](class09/class09.md)
 
-- **Class 10** [Structural Bioinformatics Pt.1]()
+- **Class 10** [Structural Bioinformatics Pt.1](class10/class10.md)
 
 - **Class 13** [RNAseq Analysis]()
 
