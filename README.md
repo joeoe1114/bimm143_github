@@ -11,7 +11,7 @@ My classwork for [BIMM143 Spring 20249(https://bioboot.github.io/bimm143_S24/)] 
 
 - **Class 8** [Breast Cancer Mini Project](class08/class08.md)
 
-- **Class 9** [Candy Analysis Mini Project]()
+- **Class 9** [Candy Analysis Mini Project](class09/class09.md)
 
 - **Class 10** [Structural Bioinformatics Pt.1]()
 
