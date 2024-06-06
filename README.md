@@ -9,12 +9,12 @@ My classwork for [BIMM143 Spring 20249(https://bioboot.github.io/bimm143_S24/)] 
 
 - **Class 7** [Machine Learning 1](class07/class07.md)
 
-- **Class 8** []()
+- **Class 8** [Breast Cancer Mini Project]()
 
-- **Class 9**
+- **Class 9** [Candy Analysis Mini Project]()
 
-- **Class 10**
+- **Class 10** [Structural Bioinformatics Pt.1]()
 
-- **Class 11**
+- **Class 13** [RNAseq Analysis]()
 
-- **Class 12** 
+- **Class 14** [RNAseq Mini Project]()
