@@ -1,0 +1,216 @@
+---
+title: "Class14: RNASeq Mini-Project"
+author: "Joanne Wu (PID: A17060517)"
+format: pdf
+editor: visual
+---
+
+Here we run through a complete RNASeq analysis from counts to pathways and biological insights...
+
+## Data Import
+
+```{r}
+countData = read.csv("GSE37704_featurecounts.csv", row.names=1)
+colData = read.csv("GSE37704_metadata.csv", row.names=1)
+```
+
+Wee peak:
+
+```{r}
+head(colData)
+```
+
+```{r}
+#countData[,-1]
+```
+
+```{r}
+countData <- countData[,-1]
+```
+
+### Remove zero count genes
+
+Filter count data where you have 0 read count acrooss all samples.
+
+```{r}
+head(countData)
+```
+
+```{r}
+to.keep.inds <- rowSums(countData) > 0
+countData <- countData[to.keep.inds,]
+```
+
+## Setup for DESeq
+
+```{r}
+library(DESeq2)
+
+dds <- DESeqDataSetFromMatrix(countData=countData,
+                             colData=colData,
+                             design=~condition)
+```
+
+## Running DESeq
+
+```{r}
+dds <- DESeq(dds)
+res <- results(dds)
+```
+
+```{r}
+head(dds)
+```
+
+```{r}
+head(res)
+```
+
+### Save results to data
+
+```{r}
+write.csv(res, file = "myresults.csv")
+```
+
+## Add gene annotation data (gene names etc.)
+
+```{r}
+library("AnnotationDbi")
+library("org.Hs.eg.db")
+```
+
+```{r}
+columns(org.Hs.eg.db)
+```
+
+```{r}
+res$entrez <- mapIds(org.Hs.eg.db,
+                     keys = rownames(res),
+                     keytype = "ENSEMBL",
+                     column = "ENTREZID")
+```
+
+```{r}
+res$symbol <- mapIds(org.Hs.eg.db,
+                     keys = rownames(res),
+                     keytype = "ENSEMBL",
+                     column = "SYMBOL")
+```
+
+## Results visualization
+
+```{r}
+library(ggplot2)
+
+data <- as.data.frame(res)
+
+ggplot(data) +
+  aes(log2FoldChange, -log(padj))+
+  geom_point()
+```
+
+```{r}
+library(EnhancedVolcano)
+
+x <- as.data.frame(res)
+
+EnhancedVolcano(x,
+                lab = x$symbol,
+                x = 'log2FoldChange',
+                y = 'pvalue')
+```
+
+## Save our results
+
+```{r}
+write.csv(res, file="myresults_annotated.csv")
+```
+
+## Pathway analysis (KEGG, GO, Reactome)
+
+```{r}
+#| message: false
+library(gage)
+library(gageData)
+library(pathview)
+```
+
+Fold change vector with ENTREZ ID names
+
+```{r}
+foldchanges = res$log2FoldChange
+names(foldchanges) = res$entrez
+head(foldchanges)
+```
+
+### KEGG
+
+```{r}
+data(kegg.sets.hs)
+data(sigmet.idx.hs)
+
+keggres = gage(foldchanges, gsets=kegg.sets.hs)
+```
+
+Look at the first few down (less) pathways
+
+```{r}
+head(keggres$less)
+```
+
+```{r}
+pathview(gene.data=foldchanges, pathway.id="hsa04110")
+```
+
+![](hsa04110.pathview.png) 
+# A different PDF based output of the same data
+
+```{r}
+pathview(gene.data=foldchanges, pathway.id="hsa04110", kegg.native=FALSE)
+```
+
+## Focus on top 5 upregulated pathways here for demo purposes only
+
+```{r}
+keggrespathways <- rownames(keggres$greater)[1:5]
+```
+
+# Extract the 8 character long IDs part of each string
+
+```{r}
+keggresids = substr(keggrespathways, start=1, stop=8)
+keggresids
+```
+
+```{r}
+pathview(gene.data=foldchanges, pathway.id=keggresids, species="hsa")
+```
+
+## Section 3. Gene Ontology (GO)
+
+```{r}
+data(go.sets.hs)
+data(go.subs.hs)
+```
+
+# Focus on Biological Process subset of GO
+
+```{r}
+gobpsets = go.sets.hs[go.subs.hs$BP]
+
+gobpres = gage(foldchanges, gsets=gobpsets, same.dir=TRUE)
+
+lapply(gobpres, head)
+```
+
+## Section 4. Reactome Analysis
+
+```{r}
+sig_genes <- res[res$padj <= 0.05 & !is.na(res$padj), "symbol"]
+print(paste("Total number of significant genes:", length(sig_genes)))
+```
+
+```{r}
+write.table(sig_genes, file="significant_genes.txt", row.names=FALSE, col.names=FALSE, quote=FALSE)
+```
+
